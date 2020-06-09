@@ -44,10 +44,10 @@ encrypted =
           date: "040895"
           }
 
-# encrypt a message with a key (uses today's date)
+# encrypt a message without given date (uses today's date)
 encrypted = enigma.encrypt("hello world", "02715")
 
-# encrypt a message (generates random key and uses today's date)
+# encrypt a message without given key and date(generates random key and uses today's date)
 encrypted = enigma.encrypt("hello world")
   
 - #decrypt method

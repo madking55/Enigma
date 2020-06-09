@@ -1,5 +1,6 @@
 require_relative 'test_helper'
 require './lib/message_shifter'
+require './lib/enigma'
 
 class MessageShifterTest < Minitest::Test
 

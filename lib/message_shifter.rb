@@ -19,7 +19,7 @@ class MessageShifter
 
   def generate_offsets(date)
     squared = date.to_i ** 2
-    offsets = squared.digits.reverse[-4..-1]
+    squared.digits.reverse[-4..-1]
   end
 
   def generate_shifts
@@ -45,6 +45,7 @@ class MessageShifter
     chars_shifts
   end
 
+  # TODO: make it work for uppercase letters and characters not included in characters_set
   def shift_message
     encrypted_message = ''
     @message.each_char.with_index do |char, idx|
