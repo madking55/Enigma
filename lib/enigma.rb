@@ -9,8 +9,8 @@ class Enigma
   end
 
   def encrypt(message, key = generate_key, date = todays_date)
-    shift = ShiftGenerator.new(key, date)
-    shifted_message = MessageShifter.new(message, shift)
+    shift = ShiftGenerator.new(key, date).generate_shift_values
+    shifted_message = MessageShifter.new(message, shift).shift_message
     generate_hash(shifted_message, key, date)
   end
 
