@@ -45,32 +45,16 @@ class MessageShifter
     chars_shifts
   end
 
-  def shift_character
-    # find char index in message => 0
-    char = @message.chars.first
-    char_idx_in_message = @message.chars.index(char)
-
-    # find chars_shift for char
-    char_shift = chars_shifts[char_idx_in_message]
-
-    # get new_idx for encrypted char
-    char_idx_in_charset = @characters_set.index(char)
-    new_idx = char_idx_in_charset + char_shift
-
-    # find and return char at new_idx in characters_set
-    new_char = @characters_set[new_idx]
+  def shift_message
+    encrypted_message = ''
+    @message.each_char.with_index do |char, idx|
+      char_idx_in_message = idx
+      char_shift = chars_shifts[char_idx_in_message]
+      char_idx_in_charset = @characters_set.index(char)
+      new_idx = char_idx_in_charset + char_shift
+      new_char = @characters_set[new_idx % 27]
+      encrypted_message += new_char
+    end
+    encrypted_message
   end
-
-  # def shift_message
-  #   encrypted = []
-  #   characters = @message.chars
-  #   characters.each_with_index do |char, idx|
-  #     current_idx = @characters_set.index(char)
-  #     new_idx = current_idx + chars_shifts[idx]
-  #     encrypted << @characters_set[new_idx % 27] 
-  #   end
-  #   encrypted
-  # end
-    # determine new value for chars
-    # return encrypted
 end

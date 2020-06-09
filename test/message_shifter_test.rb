@@ -39,14 +39,8 @@ class MessageShifterTest < Minitest::Test
     assert_equal expected, @shifter.chars_shifts
   end
 
-  def test_it_can_shift_character
-    encrypted = "k"
-    assert_equal encrypted, @shifter.shift_character
-  end
-
   def test_it_can_shift_message
-    skip
-    assert_equal @encrypted.chars, @shifter.shift_message
+    assert_equal @encrypted, @shifter.shift_message
   end
   
 end
