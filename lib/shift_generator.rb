@@ -1,13 +1,9 @@
 class ShiftGenerator
-  attr_reader :key, :date
 
   def initialize(key, date)
     @key = key
     @date = date
-    @shift = []
   end
-
-  
 
   def generate_keys(key)
     keys = []
@@ -23,14 +19,15 @@ class ShiftGenerator
     squared.digits.reverse[-4..-1]
   end
 
-  def generate_shifts
-    keys = generate_keys(key)
-    offsets = generate_offsets(date)
-    @shift[0] = keys[0] + offsets[0]
-    @shift[1] = keys[1] + offsets[1]
-    @shift[2] = keys[2] + offsets[2]
-    @shift[3] = keys[3] + offsets[3]
-    @shift
+  def generate_shift_values
+    shift_values = []
+    keys = generate_keys(@key)
+    offsets = generate_offsets(@date)
+    shift_values[0] = keys[0] + offsets[0]
+    shift_values[1] = keys[1] + offsets[1]
+    shift_values[2] = keys[2] + offsets[2]
+    shift_values[3] = keys[3] + offsets[3]
+    shift_values
   end
 
 end

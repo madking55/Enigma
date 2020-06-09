@@ -1,14 +1,10 @@
 class MessageShifter
   CHARS_SET = ("a".."z").to_a << " "
 
-  
-  # attr_reader :message, :key, :date, :characters_set
-
-  # def initialize(message, key, date)
-  #   @message = message
-  #   @key = key
-  #   @date = date
-  # end
+  def initialize(message, shift)
+    @message = message
+    @shift = shift
+  end
 
   def chars_shifts
     # determine the shift to apply based on char index
@@ -16,7 +12,7 @@ class MessageShifter
     chars_shifts = []
     sliced_message.each do |array|
       array.each_with_index do |char, idx|
-        chars_shifts << generate_shifts[idx]
+        chars_shifts << @shift[idx]
       end  
     end
     chars_shifts
@@ -24,15 +20,15 @@ class MessageShifter
 
   # TODO: make it work for uppercase letters and characters not included inCHARS_SET
   def shift_message
-    encrypted_message = ''
+    shifted_message = ''
     @message.each_char.with_index do |char, idx|
       char_idx_in_message = idx
       char_shift = chars_shifts[char_idx_in_message]
       char_idx_in_charset = CHARS_SET.index(char)
       new_idx = char_idx_in_charset + char_shift
       new_char = CHARS_SET[new_idx % 27]
-      encrypted_message += new_char
+      shifted_message += new_char
     end
-    encrypted_message
+    shifted_message
   end
 end

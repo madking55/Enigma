@@ -4,28 +4,22 @@ require_relative 'test_helper'
 
 class EnigmaTest < Minitest::Test
 
-  def setup 
-    @message = "hello world"
-    @key = "02715"
-    @date = "040895"
-    @enigma = Enigma.new(@message, @key, @date)
-    @encrypted =  {
-      encryption: "keder ohulw",
-      key: "02715",
-      date: "040895"
-    }
-  end
+  # def setup 
+  #   @message = "hello world"
+  #   @key = "02715"
+  #   @date = "040895"
+  #   @enigma = Enigma.new(@message, @key, @date)
+  #   @encrypted =  {
+  #     encryption: "keder ohulw",
+  #     key: "02715",
+  #     date: "040895"
+  #   }
+  # end
   
   def test_it_exists
     assert_instance_of Enigma, @enigma
   end
 
-  def test_it_has_attributes
-    assert_equal "hello world", @enigma.message
-    assert_equal "02715", @enigma.key
-    assert_equal "040895", @enigma.date
-  end
-  
   def test_it_can_get_todays_date
     today = mock('date object')
     Date.expects(:today).returns(today)
