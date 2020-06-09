@@ -21,10 +21,6 @@ class EnigmaTest < Minitest::Test
   def test_it_can_generate_key
     @enigma.stubs(:generate_key).returns("02715")
     assert_equal "02715", @enigma.generate_key
-
-
-    # srand(1111)
-    # assert_equal "00311", @enigma.generate_key
   end
 
   def test_it_can_encrypt_message_with_key_and_date
