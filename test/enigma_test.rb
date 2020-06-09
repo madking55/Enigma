@@ -1,10 +1,14 @@
 require './lib/enigma'
 require './lib/message_shifter'
 require_relative 'test_helper'
+
 class EnigmaTest < Minitest::Test
 
   def setup 
-    @enigma = Enigma.new
+    @message = "hello world"
+    @key = "02715"
+    @date = "040895"
+    @enigma = Enigma.new(@message, @key, @date)
     @encrypted =  {
       encryption: "keder ohulw",
       key: "02715",
@@ -14,6 +18,12 @@ class EnigmaTest < Minitest::Test
   
   def test_it_exists
     assert_instance_of Enigma, @enigma
+  end
+
+  def test_it_has_attributes
+    assert_equal "hello world", @enigma.message
+    assert_equal "02715", @enigma.key
+    assert_equal "040895", @enigma.date
   end
   
   def test_it_can_get_todays_date
@@ -30,7 +40,8 @@ class EnigmaTest < Minitest::Test
   end
 
   def test_it_can_encrypt_message_with_key_and_date
-  assert_equal @encrypted, @enigma.encrypt("hello world", "02715", "040895")                
+    skip
+    assert_equal @encrypted, @enigma.encrypt("hello world", "02715", "040895")                
   end
 
   # TODO
