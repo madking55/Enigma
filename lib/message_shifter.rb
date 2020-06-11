@@ -31,4 +31,17 @@ class MessageShifter
     end
     shifted_message
   end
+
+  def unshift_message
+   unshifted_message = '' 
+   @message.each_char.with_index do |char, idx|
+    char_idx_in_message = idx
+    char_shift = chars_shifts[char_idx_in_message]
+    char_idx_in_charset = CHARS_SET.index(char)
+    new_idx = char_idx_in_charset - char_shift
+    new_char = CHARS_SET[new_idx % 27]
+    unshifted_message += new_char
+   end
+   unshifted_message
+  end
 end
