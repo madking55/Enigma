@@ -22,11 +22,15 @@ class MessageShifter
   def shift_message
     shifted_message = ''
     @message.each_char.with_index do |char, idx|
-      char_idx_in_message = idx
-      char_shift = chars_shifts[char_idx_in_message]
-      char_idx_in_charset = CHARS_SET.index(char)
-      new_idx = char_idx_in_charset + char_shift
-      new_char = CHARS_SET[new_idx % 27]
+      if CHARS_SET.include?(char)
+        char_idx_in_message = idx
+        char_shift = chars_shifts[char_idx_in_message]
+        char_idx_in_charset = CHARS_SET.index(char)
+        new_idx = char_idx_in_charset + char_shift
+        new_char = CHARS_SET[new_idx % 27]
+      else
+        new_char = char
+      end
       shifted_message += new_char
     end
     shifted_message
@@ -35,11 +39,15 @@ class MessageShifter
   def unshift_message
    unshifted_message = '' 
    @message.each_char.with_index do |char, idx|
-    char_idx_in_message = idx
-    char_shift = chars_shifts[char_idx_in_message]
-    char_idx_in_charset = CHARS_SET.index(char)
-    new_idx = char_idx_in_charset - char_shift
-    new_char = CHARS_SET[new_idx % 27]
+    if CHARS_SET.include?(char)
+      char_idx_in_message = idx
+      char_shift = chars_shifts[char_idx_in_message]
+      char_idx_in_charset = CHARS_SET.index(char)
+      new_idx = char_idx_in_charset - char_shift
+      new_char = CHARS_SET[new_idx % 27]
+    else
+      new_char = char
+    end
     unshifted_message += new_char
    end
    unshifted_message
