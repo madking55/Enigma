@@ -7,11 +7,12 @@ class EnigmaTest < Minitest::Test
 
   def setup 
     @enigma = Enigma.new
-    @encrypted =  {
-      encryption: "keder ohulw",
-      key: "02715",
-      date: "040895"
-    }
+    @encrypted =  
+                {
+                  encryption: "keder ohulw",
+                  key: "02715",
+                  date: "040895"
+                }
   end
   
   def test_it_exists
@@ -44,5 +45,17 @@ class EnigmaTest < Minitest::Test
     Date.stubs(:today).returns(todays_date)
     @enigma.stubs(:generate_key).returns("02715")
     assert_equal @encrypted, @enigma.encrypt("hello world")                
+  end
+
+  def test_it_can_decrypt_message
+    todays_date = Date.new(1995, 8, 04)
+    Date.stubs(:today).returns(todays_date)
+    decrypted = 
+              {
+                decryption: "hello world",
+                key: "02715",
+                date: "040895"            
+              } 
+    assert_equal decrypted, @enigma.decrypt("keder ohulw", "02715")
   end
 end

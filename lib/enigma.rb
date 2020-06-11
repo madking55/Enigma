@@ -11,12 +11,26 @@ class Enigma
   def encrypt(message, key = generate_key, date = todays_date)
     shift = ShiftGenerator.new(key, date).generate_shift_values
     shifted_message = MessageShifter.new(message, shift).shift_message
-    generate_hash(shifted_message, key, date)
+    generate_encryption_hash(shifted_message, key, date)
   end
 
-  def generate_hash(shifted_message, key, date)
+  def decrypt(ciphertext, key, date = todays_date)
+    shift = ShiftGenerator.new(key, date).generate_shift_values
+    unshifted_message = MessageShifter.new(ciphertext, shift).unshift_message
+    generate_decryption_hash(unshifted_message, key, date)
+  end
+
+  def generate_encryption_hash(shifted_message, key, date)
     {
       encryption: shifted_message,
+      key: key,
+      date: date
+    }
+  end
+
+  def generate_decryption_hash(shifted_message, key, date)
+    {
+      decryption: shifted_message,
       key: key,
       date: date
     }
