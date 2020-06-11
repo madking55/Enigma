@@ -14,11 +14,11 @@ class ShiftGeneratorTest < Minitest::Test
   end
 
   def test_it_can_generate_keys
-    assert_equal [02, 27, 71, 15], @shift.generate_keys(@key)
+    assert_equal [02, 27, 71, 15],  @shift.generate_keys(@key)
   end
 
   def test_it_can_generate_offsets
-    assert_equal [1, 0, 2, 5], @shift.generate_offsets(@date)
+    assert_equal [1, 0, 2, 5],@shift.generate_offsets(@date)
   end
 
   def test_it_can_generate_shifts

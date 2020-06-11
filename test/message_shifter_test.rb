@@ -12,13 +12,6 @@ class MessageShifterTest < Minitest::Test
     assert_instance_of MessageShifter, shifter
   end
   
-  def test_it_returns_chars_shifts
-    message = "hello world"
-    shifter = MessageShifter.new(message, @shift)
-    expected = [3, 27, 73, 20, 3, 27, 73, 20, 3, 27, 73]
-    assert_equal expected, shifter.chars_shifts
-  end
-  
   def test_it_can_shift_message
     message = "hello world"
     shifter = MessageShifter.new(message, @shift)
