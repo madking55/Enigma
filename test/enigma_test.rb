@@ -1,36 +1,48 @@
 require './lib/enigma'
+require './lib/message_shifter'
+require './lib/shift_generator'
 require_relative 'test_helper'
+
 class EnigmaTest < Minitest::Test
 
   def setup 
     @enigma = Enigma.new
+    @encrypted =  {
+      encryption: "keder ohulw",
+      key: "02715",
+      date: "040895"
+    }
   end
   
   def test_it_exists
     assert_instance_of Enigma, @enigma
   end
-  
-  def test_it_can_get_todays_date
-    today = mock('date object')
-    Date.expects(:today).returns(today)
-    today.expects(:strftime).returns('030620')
 
-    assert_equal '030620', @enigma.todays_date
+  def test_it_can_get_todays_date
+    todays_date = Date.new(1995, 8, 04)
+    Date.stubs(:today).returns(todays_date)
+    assert_equal '040895', @enigma.todays_date
   end
 
   def test_it_can_generate_key
-    srand(1111)
-    assert_equal "68325", @enigma.generate_key
+    @enigma.stubs(:generate_key).returns("02715")
+    assert_equal "02715", @enigma.generate_key
   end
-
+  
   def test_it_can_encrypt_message_with_key_and_date
-    skip
-    expected =  {
-                  encryption: "keder ohulw",
-                  key: "02715",
-                  date: "040895"
-                }
-
-  assert_equal expected, @enigma.encrypt("hello world", "02715", "040895")                
+    assert_equal @encrypted, @enigma.encrypt("hello world", "02715", "040895")                
+  end
+  
+  def test_it_can_encrypt_message_without_date
+    todays_date = Date.new(1995, 8, 04)
+    Date.stubs(:today).returns(todays_date)
+    assert_equal @encrypted, @enigma.encrypt("hello world", "02715")                
+  end
+  
+  def test_it_can_encrypt_message_without_key_and_date
+    todays_date = Date.new(1995, 8, 04)
+    Date.stubs(:today).returns(todays_date)
+    @enigma.stubs(:generate_key).returns("02715")
+    assert_equal @encrypted, @enigma.encrypt("hello world")                
   end
 end
