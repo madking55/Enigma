@@ -19,10 +19,8 @@ class EnigmaTest < Minitest::Test
   end
 
   def test_it_can_get_todays_date
-    today = mock('date object')
-    Date.expects(:today).returns(today)
-    today.expects(:strftime).returns('040895')
-
+    todays_date = Date.new(1995, 8, 04)
+    Date.stubs(:today).returns(todays_date)
     assert_equal '040895', @enigma.todays_date
   end
 
@@ -30,20 +28,21 @@ class EnigmaTest < Minitest::Test
     @enigma.stubs(:generate_key).returns("02715")
     assert_equal "02715", @enigma.generate_key
   end
-
+  
   def test_it_can_encrypt_message_with_key_and_date
-    skip
     assert_equal @encrypted, @enigma.encrypt("hello world", "02715", "040895")                
   end
-
-  # TODO
+  
   def test_it_can_encrypt_message_without_date
+    todays_date = Date.new(1995, 8, 04)
+    Date.stubs(:today).returns(todays_date)
     assert_equal @encrypted, @enigma.encrypt("hello world", "02715")                
   end
-
-  # TODO
+  
   def test_it_can_encrypt_message_without_key_and_date
-    skip
+    todays_date = Date.new(1995, 8, 04)
+    Date.stubs(:today).returns(todays_date)
+    @enigma.stubs(:generate_key).returns("02715")
     assert_equal @encrypted, @enigma.encrypt("hello world")                
   end
 end

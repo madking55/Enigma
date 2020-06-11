@@ -1,7 +1,7 @@
 class Enigma
 
   def todays_date
-    Date.today.strftime("%d/%m/%Y")
+    Date.today.strftime("%d%m%y")
   end
 
   def generate_key
