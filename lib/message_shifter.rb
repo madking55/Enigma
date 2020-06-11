@@ -18,10 +18,9 @@ class MessageShifter
     chars_shifts
   end
 
-  # TODO: make it work for uppercase letters and characters not included inCHARS_SET
   def shift_message
     shifted_message = ''
-    @message.each_char.with_index do |char, idx|
+    @message.downcase.each_char.with_index do |char, idx|
       if CHARS_SET.include?(char)
         char_idx_in_message = idx
         char_shift = chars_shifts[char_idx_in_message]

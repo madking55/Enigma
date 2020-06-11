@@ -24,6 +24,18 @@ class MessageShifterTest < Minitest::Test
     shifter = MessageShifter.new(message, @shift)
     assert_equal "keder ohulw", shifter.shift_message
   end
+
+  def test_it_can_shift_characters_not_in_charset
+    message = "hello world!"
+    shifter = MessageShifter.new(message, @shift)
+    assert_equal "keder ohulw!", shifter.shift_message
+  end
+
+  def test_it_can_shift_upercase_letters
+    message = "HELLO world!"
+    shifter = MessageShifter.new(message, @shift)
+    assert_equal "keder ohulw!", shifter.shift_message
+  end
   
   def test_it_can_unshift_message
     message = "keder ohulw"
@@ -31,15 +43,10 @@ class MessageShifterTest < Minitest::Test
     assert_equal "hello world", shifter.unshift_message
   end
   
-  def test_it_can_shift_characters_not_in_charset
-    message = "hello world!"
-    shifter = MessageShifter.new(message, @shift)
-    assert_equal "keder ohulw!", shifter.shift_message
-  end
-  
   def test_it_can_unshift_characters_not_in_charset
     message = "keder ohulw!"
     shifter = MessageShifter.new(message, @shift)
     assert_equal "hello world!", shifter.unshift_message
   end
+  
 end
