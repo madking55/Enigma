@@ -104,7 +104,7 @@ The offsets are found using the date of transmission.
 - D offset: The fourth digit (5)
 
 
-## Iteration 2 - Command Line Interface (status: todo)
+## Iteration 2 - Command Line Interface (status: done)
 
 Add a command line interface for encryption and decryption. You should create a Runner file called encrypt.rb that takes two command line arguments. The first is an existing file that contains a message to encrypt. The second is a file where your program should write the encrypted message. In addition to writing the encrypted message to the file, your program should output to the screen the file it wrote to, the key and the date.
 
@@ -119,7 +119,7 @@ $ ruby ./lib/decrypt.rb encrypted.txt decrypted.txt 82648 240818
 Created 'decrypted.txt' with the key 82648 and date 240818
 ```
 
-## Iteration 3 - Cracking a Key (status: todo)
+## Iteration 3 - Cracking a Key (status: in progress)
 
 When the key is not known, we can crack the encryption using just the date of transmission. We believe that each enemy message ends with the characters " end". Use this to crack the encryption.
 
