@@ -17,13 +17,24 @@ class KeyCrackerTest < Minitest::Test
     assert_equal [6, 3, 2, 4], @cracker.generate_offsets(@date)
   end
 
+  def test_it_returns_ending_index_hash
+    expected = {" " => 11, "e" => 12, "n" => 13, "d" => 14 }
+    assert_equal expected, @cracker.ending_index
+  end
+
+  def test_it_returns_ending_shift_keys
+    expected = { " " => "D", "e" => "A", "n" => "B", "d" => "C" }
+    assert_equal expected, @cracker.determine_ending_shift_keys
+  end
+
   def test_it_returns_shift_values
-    assert_equal 20, @cracker.determine_shift_key_value
+    expected = { "A" => 8, "B" => 3, "C" => 0, "D" => 4 }
+    assert_equal expected , @cracker.determine_shift_key_values
   end
 
   def test_it_returns_keys
     skip
-    assert_equal "08304", @cracker.find_keys
+    assert_equal "08304", @cracker.determine_key
   end
   
 end
